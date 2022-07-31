@@ -1,3 +1,7 @@
+html{
+    width: 100%;
+    height: 100%;
+}
 body{
     margin: 0px 0px 0px 0px;
     width: 100%;
@@ -30,7 +34,7 @@ li{
 .navbar{
     width: 50%;
     border: solid 1px black;
-    margin-left: 55%;
+    margin-left: 48%;
 }
 .nav a{
     text-decoration: none;
@@ -40,19 +44,34 @@ a:hover{
     color: white;
 }
 
-/*.topbar{
+.topbar{
     position: fixed;
-}*/
+}
 
-/*.sideimage{
-    width: 48%;
+.body{
+    height: 91.5;
+    width: 100%;
     border: solid 1px black;
-    height: auto;
-    
-}*/
+    position: absolute;
+    top: 25%;
+    margin-top: 5%;
+}
 .sideimage img{
-    padding: 10px;
-    width: 48%;
-    height:150%;    
+    width: 50%;
+    height:91.5%; 
+    margin-top: 0px; 
+    margin-bottom: 0px;
+    border-radius:0 25px 25px 25px ;
+    float: left;
+    
+}
 
+.form{
+    border: solid 1px black;
+    width: 45% ;
+    height: 100px;
+}
+form{
+    width: 30%;
+    padding: 5%;
 }
