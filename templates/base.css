@@ -1,23 +1,14 @@
-html{
-    width: 100%;
-    height: 100%;
-}
 body{
-    margin: 0px 0px 0px 0px;
-    width: 100%;
-    height: 100%;
-}
-.topbar{
-    border: solid 1px black;
-    height: auto;
-    width: 100%;
-    /*margin-top: 10px;*/
+    margin: 0 0 0 0;
+    background: url('estate.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .logo{
     padding: 5px;
-    border: solid 1px black;
-    width: 20%;
+
+    width: 17%;
     float: left;
     margin-left: 5%;
 }
@@ -32,46 +23,56 @@ li{
     
 }
 .navbar{
-    width: 50%;
-    border: solid 1px black;
-    margin-left: 48%;
+    width: 45%;
+    
+    margin-left: 50%;
 }
 .nav a{
     text-decoration: none;
 }
-a:hover{
+.nav a:hover{
     border-bottom: 2px black solid;
     color: white;
 }
 
 .topbar{
-    position: fixed;
-}
-
-.body{
-    height: 91.5;
-    width: 100%;
     border: solid 1px black;
-    position: absolute;
-    top: 25%;
-    margin-top: 5%;
+    background-color: white;
 }
-.sideimage img{
-    width: 50%;
-    height:91.5%; 
-    margin-top: 0px; 
-    margin-bottom: 0px;
-    border-radius:0 25px 25px 25px ;
-    float: left;
-    
+hr{
+    width: 90%;
 }
 
 .form{
-    border: solid 1px black;
-    width: 45% ;
-    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
 }
 form{
-    width: 30%;
-    padding: 5%;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border: solid 1px black;
+}
+
+h3{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+
+}
+
+.username, .pwd{
+    font-size: larger;
+    padding: 5px;
+    
+}
+input{
+    align-self: center;
+}
+.login{
+    width: 100%;
+    font-size: larger;
+    padding: 5px;
+    border-radius: 20px;
 }
