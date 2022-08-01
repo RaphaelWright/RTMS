@@ -5,46 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RTMS - Manage tenants</title>
-    <link rel="stylesheet" href = "base.css" \>
+    <link rel="stylesheet" href = "static\css\base.css" \>
 </head>
 <body>
     
-    <!--topbar-->
-    <div class="topbar">
-        <!-- logo-->
-        <div class="logo">
-            <img src="loogo.png">
-        </div>
-
-        <!--nav buttons-->
-        <div class="navbar">
-            <ul class="nav">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="landlords.html">Landlord</a></li>
-                <li><a href="tenants.html">Tenants</a></li>
-                <li><a href="Contact.html">Contact</a></li>
-                <li><a href="About.html">About</a></li>
-            </ul>
-        </div>
-    </div>
-
-    
-    <div class="form">
-    <form>
-        <h3>Sign in</h3>
-        <input type="text" name= "username" class = "username" placeholder="Username"><br>
-        <p></p>
-        <input type="password" name="password" placeholder="Password" class="pwd">
-        <p>Forgot password?<a href="forgot.html">Click here</a></a></p>
-        <input type="button" name = "login" value = "Login" class="login">
-
-        <hr>
-        <p>Don't have an account?<a href="signup">Sign Up</a></a></p>
-    
-
-    </form>
-    </div>
-
+{% block content %}
+{% endblock %}
     
 </body>
 </html>
