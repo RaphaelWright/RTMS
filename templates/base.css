@@ -3,6 +3,8 @@ body{
     background: url('estate.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100%;
+    width: 100%;
 }
 
 .logo{
@@ -36,7 +38,7 @@ li{
 }
 
 .topbar{
-    border: solid 1px black;
+    border: solid 1px rgb(255, 255, 255);
     background-color: white;
 }
 hr{
