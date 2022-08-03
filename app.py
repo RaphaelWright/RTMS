@@ -8,19 +8,16 @@ app = Flask(__name__)
 #routings
 @app.route('/')
 def index():
-    title = "RTMS - Manage Tenants"
-    return render_template("index.html", title = title)
+    return render_template("index.html")
 
 
 @app.route('/about')
 def about():
-    title = "About RTMS"
     return render_template('about.html', title = title)
 
 
 @app.route('/contact')
 def contact():
-    title = " RTMS - Contact"
     return render_template("contact.html", title = title)
 
 
