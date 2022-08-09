@@ -82,32 +82,32 @@ input{
 }
 
 .aboutme{
-    font-size: 10em;
+    font-size: 11.5em;
     font-family:'Times New Roman', Times, serif;
-    border: solid 1px black;
     padding-bottom: 0px;
     margin: 0 0 0 0;
 }
 
 .aboutinfo{
-    width: 50%;
-    border: solid 1px black;
+    width: 70%;
     height: auto;
-    margin-top:8.5% ;
+    margin-top:5.8% ;
+    margin-left: 10%;
 }
 .text{
     padding-top: 0px;
+    padding-left: 8px;
+    margin: 0 0 0 0;
+    width: 70%;
+}
+
+.contactme{
+    font-size: 11.5em;
+    font-family:'Times New Roman', Times, serif;
+    padding-bottom: 0px;
     margin: 0 0 0 0;
 }
-
-.aboutpic{
-    height: 40%;
-    float: left;
-    width: 40%;
+.name{
+    font-size: 5em;
 }
 
-.wholeabout{
-    width: 100%;
-    height: auto;
-    border:solid 1px black;
-}
