@@ -1,0 +1,34 @@
+{% extends 'base2.html' %}
+
+
+{% block content %}
+<form class="signup">
+    <p>
+        <input type="text" name="uname" class="uname" placeholder="Username" required>
+    </p>
+    <p>
+
+        <input type = "text" name = "fname" class="fname" placeholder="First Name">
+    </p>
+
+    <p>
+        <input type="text" name="surname" class="sname" placeholder="Surname">
+    </p>
+
+    <p>
+        <input type="email" name="pemail" class="email" placeholder="email">
+
+    </p>
+
+    <p>
+        <input type="tel" name="telephone" class="tele" placeholder="Telephone" required>
+    </p>
+
+    <p>
+        <input type="password" name="pwd" class="pwd" placeholder="Password" required>
+    </p>
+
+    <input type="submit" name="submit" value="Sign Up" class="signup">
+</form>
+
+{% endblock %}

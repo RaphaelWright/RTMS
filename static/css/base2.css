@@ -54,11 +54,7 @@ hr{
     text-align: center;
     min-height: 100vh;
 }
-form{
-    background-color: rgb(255, 255, 255);
-    padding: 10px;
-    border: solid 1px black;
-}
+
 
 h3{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -66,7 +62,7 @@ h3{
 
 }
 
-.username, .pwd{
+.username, .pwd, .sname, .uname, .email, .fname, .tele{
     font-size: larger;
     padding: 5px;
     
@@ -110,4 +106,11 @@ input{
 .name{
     font-size: 5em;
 }
+.signup{
+width: 100px;
+font-size: larger;
+padding: 5px;
+border-radius: 20px;
+}
+
 
