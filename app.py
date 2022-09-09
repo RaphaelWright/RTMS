@@ -1,15 +1,14 @@
 from flask import Flask,render_template,session,request
-from flask_mysqldb import MySQL
+
+import control
+import model
 
  
 app = Flask(__name__)
-app.config['SECRET_KEY']= 'RTMS'
+if __name__ == "__main__":
+    app.run(debug=True)
 
-#database config
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'root'
-app.config['MYSQL_DB'] = 'MyDB'
+app.config['SECRET_KEY']= 'RTMS'
 
 mysql = MySQL(app)
 
