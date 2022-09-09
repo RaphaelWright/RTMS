@@ -2,17 +2,28 @@
 
 
 {% block content %}
+
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+
+
 <form class="signup" method="POST" action="">
     <p>
-        <input type="text" name="uname" class="uname" placeholder="Username" required>
+        <input type="text" name="username" class="uname" placeholder="Username" required>
     </p>
     <p>
 
-        <input type = "text" name = "fname" class="fname" placeholder="First Name">
+        <input type = "text" name = "first_name" class="fname" placeholder="First Name">
     </p>
 
     <p>
-        <input type="text" name="surname" class="sname" placeholder="Surname">
+        <input type="text" name="last_name" class="sname" placeholder="Surname">
     </p>
 
     <p>

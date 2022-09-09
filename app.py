@@ -1,14 +1,7 @@
 from flask import Flask,render_template,request
 from flask_mysqldb import MySQL
 import yaml
-
-
-
 app = Flask(__name__)
-
-if __name__ == "__main__":
-    app.run(debug=True)
-
 
 db = yaml.full_load(open('db.yaml'))
 app.config['MYSQL_HOST'] = db['mysql_host']
@@ -54,6 +47,6 @@ def signup():
         return 'success'
     return render_template('signup.html')
 
-
-
+if __name__ == "__main__":
+    app.run(debug=True)
 
