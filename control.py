@@ -1,4 +1,4 @@
 from flask_mysqldb import MySQL
-import app1
+import app
 import model
 

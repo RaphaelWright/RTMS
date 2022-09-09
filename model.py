@@ -1,5 +1,5 @@
 import flask
 import control
-import app1
+import app
 
 from flask_mysqldb import MySQL
