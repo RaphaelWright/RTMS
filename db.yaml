@@ -1,0 +1,8 @@
+app.config['MYSQL_HOST'] =''
+app.config['MYSQL_USER'] = ''
+app.config['MYSQL_PASSWORD'] = ''
+
+mysql_host: 'localhost'
+mysql_user:  'root'
+mysql_password: '_*Dordala@2003_'
+mysql_db: 'rtms'
