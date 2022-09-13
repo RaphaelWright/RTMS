@@ -68,12 +68,16 @@ h3{
 
 }
 
-.username, .pwd{
+.username, .pwd, .msg{
     font-size: larger;
-    padding: 5px;
-    
+    padding: 5px;  
 }
-input{
+.msg{
+    color: red;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+input,.msg{
     align-self: center;
 }
 .login{

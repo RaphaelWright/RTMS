@@ -10,11 +10,12 @@
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div> -->
 
-{% endfor %}
-
+<!-- {% endfor %} -->
+   
     <div class="form">
-    <form method="POST" action="">
+    <form action = "" method="POST">
         <h3>Sign in</h3>
+        <p class="msg">{{msg}}</p>
         <input type="text" name= "username" class = "username" placeholder="Username"><br>
         <p></p>
         <input type="password" name="password" placeholder="Password" class="pwd">

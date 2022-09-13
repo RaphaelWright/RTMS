@@ -1,6 +1,7 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request, session
 from flask_mysqldb import MySQL
 import yaml
+import MySQLdb.cursors
 app = Flask(__name__)
 
 db = yaml.full_load(open('db.yaml'))
@@ -10,13 +11,33 @@ app.config['MYSQL_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_DB'] = db['mysql_db']
 app.config['SECRET_KEY']= 'RTMS'
 
+app.secret_key = 't00thl3ss'
 mysql = MySQL(app)
 
 
-@app.route('/' methods = ["GET", "POST"])
+@app.route('/', methods = ["GET", "POST"])
 def home():
-    if request.method == "POST":
-        username = 
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+        # Check if account exists using MySQL
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM personal WHERE username = %s AND password = %s', (username, password,))
+        # Fetch one record and return result
+        personal = cursor.fetchone()
+
+        # If account exists in accounts table in out database
+        if personal:
+            # Create session data, we can access this data in other routes
+            # session['loggedin'] = True
+            # session['username'] = personal['username']
+            # # Redirect to home page
+            return render_template('login.html' username = username)
+        else:
+            # Account doesnt exist or username/password incorrect
+            msg = 'Incorrect username/password!'
+            return render_template('index.html', msg = msg)
+
 
     return render_template('index.html')
 
@@ -47,7 +68,7 @@ def signup():
         cur.execute("INSERT INTO personal(Username, FirstName, Surname, Email, Telephone, Password) VALUES(%s,%s,%s,%s,%s,%s)", (username, fname, sname,userEmail,telephone, password))
         mysql.connection.commit()
         cur.close()
-        return render_template('login.html', fname = fname)
+        return render_template('login.html', username = username)
     return render_template('signup.html')
 
 if __name__ == "__main__":
