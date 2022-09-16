@@ -1,6 +1,7 @@
 from flask import Flask,render_template,request, session
 from flask_mysqldb import MySQL
 import yaml
+import hashlib
 import MySQLdb.cursors
 app = Flask(__name__)
 
@@ -32,7 +33,7 @@ def home():
             # session['loggedin'] = True
             # session['username'] = personal['username']
             # # Redirect to home page
-            return render_template('login.html' username = username)
+            return render_template('login.html', username = username)
         else:
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect username/password!'
@@ -63,6 +64,9 @@ def signup():
         userEmail = userDetails['pemail']
         telephone = userDetails['telephone']
         password = userDetails['pwd']
+        #hash password
+        
+        
 
         cur = mysql.connection.cursor()
         cur.execute("INSERT INTO personal(Username, FirstName, Surname, Email, Telephone, Password) VALUES(%s,%s,%s,%s,%s,%s)", (username, fname, sname,userEmail,telephone, password))
