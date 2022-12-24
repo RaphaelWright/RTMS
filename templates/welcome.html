@@ -1,5 +1,4 @@
-{% extends 'base2.html' %}
-
+{% extends 'base3.html' %}
 
 
 {% block content %}
@@ -10,7 +9,9 @@
 
 <div class="belowbanner">
     <h2>Got a problem?</h2>
-    <input type="text" name="complaint" class="complainttext">
+    <textarea class="textarea" name="complaint">
+        <!--COmplaint goes here-->
+    </textarea>
     <input type="submit" value="Send" name="submitcomplaint">
 </div>
 {% endblock %}

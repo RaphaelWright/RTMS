@@ -12,10 +12,10 @@ app.config['MYSQL_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_DB'] = db['mysql_db']
 app.config['SECRET_KEY']= 'RTMS'
 
-app.secret_key = 't00thl3ss'
+
 mysql = MySQL(app)
 
-
+#welcome page
 @app.route('/', methods = ["GET", "POST"])
 def home():
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
@@ -33,12 +33,11 @@ def home():
             # session['loggedin'] = True
             # session['username'] = personal['username']
             # # Redirect to home page
-            return render_template('login.html', username = username)
+            return render_template('welcome.html', username = username)
         else:
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect username/password!'
             return render_template('index.html', msg = msg)
-
 
     return render_template('index.html')
 
@@ -47,11 +46,9 @@ def home():
 def about():
     return render_template('about.html')
 
-
 @app.route('/contact')
 def contact():
     return render_template("contact.html")
-
 
 @app.route('/signup', methods = ['GET', 'POST'])
 def signup():
@@ -66,14 +63,28 @@ def signup():
         password = userDetails['pwd']
         #hash password
         
-        
-
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO personal(Username, FirstName, Surname, Email, Telephone, Password) VALUES(%s,%s,%s,%s,%s,%s)", (username, fname, sname,userEmail,telephone, password))
+        cur.execute("INSERT INTO personal(username, firstName, surname, email, telephone, password) VALUES(%s,%s,%s,%s,%s,%s)", (username, fname, sname,userEmail,telephone, password))
         mysql.connection.commit()
         cur.close()
-        return render_template('login.html', username = username)
+        return render_template('welcome.html', username = username)
     return render_template('signup.html')
+
+
+#welcome page
+# @app.route("/timeleft")
+# def timeleft():
+#     pass
+
+# @app.route("/announcements")
+# def announcements():
+#     pass
+
+
+# @app.route("aboutlandlord")
+# def aboutlandlord():
+#     pass
+
 
 if __name__ == "__main__":
     app.run(debug=True)
