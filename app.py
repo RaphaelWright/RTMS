@@ -54,17 +54,17 @@ def contact():
 def signup():
     if request.method == 'POST':
         #fetch data from form
-        userDetails = request.form 
-        username = userDetails['username']
-        fname = userDetails['first_name']
-        sname = userDetails['last_name']
-        userEmail = userDetails['pemail']
-        telephone = userDetails['telephone']
-        password = userDetails['pwd']
+        landlordDetails = request.form 
+        username = landlordDetails['username']
+        fname = landlordDetails['first_name']
+        sname = landlordDetails['last_name']
+        userEmail = landlordDetails['pemail']
+        telephone = landlordDetails['telephone']
+        password = landlordDetails['pwd']
         #hash password
         
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO personal(username, firstName, surname, email, telephone, password) VALUES(%s,%s,%s,%s,%s,%s)", (username, fname, sname,userEmail,telephone, password))
+        cur.execute("INSERT INTO landlorddetails(username, firstName, surname, email, telephone, password) VALUES(%s,%s,%s,%s,%s,%s)", (username, fname, sname,userEmail,telephone, password))
         mysql.connection.commit()
         cur.close()
         return render_template('welcome.html', username = username)
