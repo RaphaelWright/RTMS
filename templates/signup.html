@@ -4,14 +4,6 @@
 {% block content %}
 
 
-{% for message in get_flashed_messages() %}
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  {{message}}
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-{% endfor %}
-
-
 
 <form class="signup" method="POST" action="">
     <p>
@@ -27,7 +19,7 @@
     </p>
 
     <p>
-        <input type="email" name="pemail" class="email" placeholder="email">
+        <input type="email" name="pemail" class="email" placeholder="Email">
 
     </p>
 
@@ -40,10 +32,12 @@
     </p>
 
     <p>
-        <span>Tenant<input type = "radio" name="client-type" class="radioo"> &nbsp &nbsp Owner<input type="radio" name="client-type" class="radioo"></span>
+        <span>Tenant<input type = "radio" name="client_type" class="radioo" value="tenant"> &nbsp &nbsp Landlord<input type="radio" name="client_type" class="radioo" value="landlord"></span>
     </p>
 
-    <input type="submit" name="submit" value="Sign Up" class="signup">
+    <p>
+        <input type="submit" name="submit" value="Sign Up" class="signupp">
+    </p>
 </form>
 
 {% endblock %}

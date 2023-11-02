@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request, session
+from flask import Flask,render_template,request, session,url_for, redirect,flash
 from flask_mysqldb import MySQL
 import yaml
 import MySQLdb.cursors
@@ -14,33 +14,41 @@ app.config['MYSQL_HOST'] = db['mysql_host']
 app.config['MYSQL_USER'] = db['mysql_user']
 app.config['MYSQL_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_DB'] = db['mysql_db']
-app.config['SECRET_KEY']= 'RTMS'
+app.config['SECRET_KEY']= 'rtms@2023'
 
 mysql = MySQL(app)
 
 #welcome page
-@app.route('/', methods = ["GET", "POST"])
+from flask import render_template, request, flash, redirect, url_for, session
+from app import app, db
+
+@app.route('/', methods=["GET", "POST"])
 def home():
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
-        # Check if account exists using MySQL
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM personal WHERE username = %s AND password = %s', (username, password,))
-        # Fetch one record and return result
-        personal = cursor.fetchone()
 
-        # If account exists in accounts table in out database
-        if personal:
-            # Create session data, we can access this data in other routes
-            # session['loggedin'] = True
-            # session['username'] = personal['username']
-            # # Redirect to home page
-            return render_template('welcome.html', username = username)
-        else:
-            # Account doesnt exist or username/password incorrect
-            msg = 'Incorrect username/password!'
-            return render_template('index.html', msg = msg)
+        cur = mysql.connection.cursor()
+
+        # Check if the user is a tenant
+        tenant = cur.execute("SELECT * FROM tenants WHERE username = %s", (username,))
+
+        if tenant and tenant['password'] == password:
+            # Set user data in session
+            session['user_id'] = username  # Assuming 'username' can be used as an identifier
+            flash('Login successful!', 'success')
+            return redirect(url_for('welcome'))
+
+        # If the user is not a tenant, check if they are a landlord
+        landlord = cur.execute("SELECT * FROM landlorddetails WHERE landlordusername = %s", (username,))
+
+        if landlord and landlord['password'] == password:
+            # Set user data in session
+            session['user_id'] = username  # Assuming 'landlordusername' can be used as an identifier
+            flash('Login successful!', 'success')
+            return redirect(url_for('welcome'))
+
+        flash('Login unsuccessful. Please check your credentials.', 'danger')
 
     return render_template('index.html')
 
@@ -53,18 +61,18 @@ def about():
 def contact():
     return render_template("contact.html")
 
-@app.route('/signup', methods = ['GET', 'POST'])
+@app.route('/signup', methods=['GET', 'POST'])
 def signupp():
-#if statement to differentiate between tenant and landlord
+    if request.method == 'POST':
+        selected_option = request.form.get('client_type')
+        if selected_option == "tenant":
+            return tenant_signup()
+        elif selected_option == "landlord":
+            return landlord_signup()
 
-    return 
+    return render_template("signup.html")
+
     
-
-
-
-
-
-
 
 #Functions
 
@@ -85,8 +93,8 @@ def landlord_signup():
         cur.execute("INSERT INTO landlorddetails(landlordusername, firstName, surname, email, telephone, password) VALUES(%s,%s,%s,%s,%s,%s)", (username, fname, sname,userEmail,telephone, password))
         mysql.connection.commit()
         cur.close()
-        return render_template('welcome.html', username = username)
-    return render_template('signup.html')
+        return render_template('lwelcome.html', username = username)
+    
 
 #function for tenant sign up
 def tenant_signup():
@@ -105,7 +113,8 @@ def tenant_signup():
         cur.execute("INSERT INTO tenants(username, firstName, surname, email, telephone, password) VALUES(%s,%s,%s,%s,%s,%s)", (username, fname, sname,userEmail,telephone, password))
         mysql.connection.commit()
         cur.close()
-    return render_template('welcome.html', username = username)
+
+        return render_template('twelcome.html', username = username)
     
 
 
