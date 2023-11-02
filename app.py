@@ -1,9 +1,13 @@
 from flask import Flask,render_template,request, session
 from flask_mysqldb import MySQL
 import yaml
-import hashlib
 import MySQLdb.cursors
+
 app = Flask(__name__)
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
 
 db = yaml.full_load(open('db.yaml'))
 app.config['MYSQL_HOST'] = db['mysql_host']
@@ -11,7 +15,6 @@ app.config['MYSQL_USER'] = db['mysql_user']
 app.config['MYSQL_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_DB'] = db['mysql_db']
 app.config['SECRET_KEY']= 'RTMS'
-
 
 mysql = MySQL(app)
 
@@ -51,7 +54,22 @@ def contact():
     return render_template("contact.html")
 
 @app.route('/signup', methods = ['GET', 'POST'])
-def signup():
+def signupp():
+#if statement to differentiate between tenant and landlord
+
+    return 
+    
+
+
+
+
+
+
+
+#Functions
+
+#function for landlord signup
+def landlord_signup():
     if request.method == 'POST':
         #fetch data from form
         landlordDetails = request.form 
@@ -61,31 +79,38 @@ def signup():
         userEmail = landlordDetails['pemail']
         telephone = landlordDetails['telephone']
         password = landlordDetails['pwd']
-        #hash password
-        
+            #hash password
+                
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO landlorddetails(username, firstName, surname, email, telephone, password) VALUES(%s,%s,%s,%s,%s,%s)", (username, fname, sname,userEmail,telephone, password))
+        cur.execute("INSERT INTO landlorddetails(landlordusername, firstName, surname, email, telephone, password) VALUES(%s,%s,%s,%s,%s,%s)", (username, fname, sname,userEmail,telephone, password))
         mysql.connection.commit()
         cur.close()
         return render_template('welcome.html', username = username)
     return render_template('signup.html')
 
+#function for tenant sign up
+def tenant_signup():
+    if request.method == 'POST':
+        #fetch data from form
+        tenantDetails = request.form 
+        username = tenantDetails['username']
+        fname = tenantDetails['first_name']
+        sname = tenantDetails['last_name']
+        userEmail = tenantDetails['pemail']
+        telephone = tenantDetails['telephone']
+        password = tenantDetails['pwd']
+        #hash password
+                
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO tenants(username, firstName, surname, email, telephone, password) VALUES(%s,%s,%s,%s,%s,%s)", (username, fname, sname,userEmail,telephone, password))
+        mysql.connection.commit()
+        cur.close()
+    return render_template('welcome.html', username = username)
+    
 
-#welcome page
-# @app.route("/timeleft")
-# def timeleft():
-#     pass
-
-# @app.route("/announcements")
-# def announcements():
-#     pass
 
 
-# @app.route("aboutlandlord")
-# def aboutlandlord():
-#     pass
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
 
