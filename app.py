@@ -19,38 +19,37 @@ app.config['SECRET_KEY']= 'rtms@2023'
 mysql = MySQL(app)
 
 #welcome page
-from flask import render_template, request, flash, redirect, url_for, session
-from app import app, db
-
 @app.route('/', methods=["GET", "POST"])
 def home():
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
 
-        cur = mysql.connection.cursor()
-
+        cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         # Check if the user is a tenant
-        tenant = cur.execute("SELECT * FROM tenants WHERE username = %s", (username,))
+        cur.execute("SELECT * FROM tenants WHERE username = %s", (username,))
+        tenant = cur.fetchone()
 
         if tenant and tenant['password'] == password:
             # Set user data in session
             session['user_id'] = username  # Assuming 'username' can be used as an identifier
             flash('Login successful!', 'success')
-            return redirect(url_for('welcome'))
+            return redirect(url_for('twelcome'))
 
         # If the user is not a tenant, check if they are a landlord
-        landlord = cur.execute("SELECT * FROM landlorddetails WHERE landlordusername = %s", (username,))
+        cur.execute("SELECT * FROM landlorddetails WHERE landlordusername = %s", (username,))
+        landlord = cur.fetchone()
 
         if landlord and landlord['password'] == password:
             # Set user data in session
             session['user_id'] = username  # Assuming 'landlordusername' can be used as an identifier
             flash('Login successful!', 'success')
-            return redirect(url_for('welcome'))
+            return redirect(url_for('lwelcome'))
 
         flash('Login unsuccessful. Please check your credentials.', 'danger')
 
     return render_template('index.html')
+
 
     
 @app.route('/about', methods=['GET'])
@@ -72,6 +71,15 @@ def signupp():
 
     return render_template("signup.html")
 
+@app.route('/twelcome')
+def twelcome():
+
+    return render_template("twelcome.html")
+
+@app.route('/lwelcome')
+def lwelcome():
+
+    return render_template("lwelcome.html")
     
 
 #Functions
