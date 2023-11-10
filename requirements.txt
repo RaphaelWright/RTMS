@@ -5,7 +5,6 @@ Flask-MySQLdb==1.0.1
 Flask-SQLAlchemy==2.5.1
 greenlet==1.1.2
 Jinja2==3.1.2
-mysql-connector-python==8.0.30
 SQLAlchemy==1.4.39
 virtualenv==20.14.1
 Werkzeug==2.1.2
